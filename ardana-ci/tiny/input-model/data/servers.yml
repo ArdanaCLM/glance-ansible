@@ -4,17 +4,17 @@
 
   baremetal:
     netmask: 255.255.255.0
-    subnet: 192.168.10.0
+    subnet: 192.168.110.0
     server-interface: eth2
 
   servers:
 
     - id: server1
-      ip-addr: 192.168.10.3
+      ip-addr: 192.168.110.3
       role: SERVER1-ROLE
       server-group: RACK1
       mac-addr: a4:93:0c:4f:7c:73
       nic-mapping: VAGRANT
-      ilo-ip: 192.168.9.3
+      ilo-ip: 192.168.109.3
       ilo-password: password
       ilo-user: admin
