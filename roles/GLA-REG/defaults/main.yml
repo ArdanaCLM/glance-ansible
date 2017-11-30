@@ -35,7 +35,7 @@ glance_registry_log_json_file: "{{ log_dir }}/glance-registry-json.log"
 ## [database]
 ca_file: "/etc/ssl/certs/ca-certificates.crt"
 db_ssl: "{% if GLA_API.consumes_FND_MDB.vips.private[0].use_tls %}?ssl_ca={{ ca_file }}{% endif %}"
-database_connection: "mysql://{{ GLA_API.consumes_FND_MDB.vars.accounts.glance.username }}:{{ GLA_API.consumes_FND_MDB.vars.accounts.glance.password | urlencode }}@{{ GLA_API.consumes_FND_MDB.vips.private[0].host }}/glance{{ db_ssl }}"
+database_connection: "mysql+pymysql://{{ GLA_API.consumes_FND_MDB.vars.accounts.glance.username }}:{{ GLA_API.consumes_FND_MDB.vars.accounts.glance.password | urlencode }}@{{ GLA_API.consumes_FND_MDB.vips.private[0].host }}/glance{{ db_ssl }}"
 
 ## WSGI Pipeline flavor
 glance_registry_flavor: "{{ glance_default_flavor }}"
