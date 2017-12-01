@@ -20,28 +20,29 @@ bind_host = {{ glance_registry_bind_host }}
 bind_port = {{ glance_registry_port }}
 log_file = {{ glance_registry_log_file }}
 log_config_append={{ glance_registry_conf_dir }}/glance-registry-logging.conf
-rpc_backend = {{ glance_registry_notification_backend }}
 workers = {{ glance_worker_count }}
+transport_url = {{ glance_default_notification_backend }}://{{ transport_url }}
 
 [database]
 connection = {{ database_connection }}
 
 [keystone_authtoken]
-revocation_cache_time = 10
 auth_uri = {{ keystone_auth_uri }}
 auth_url = {{ keystone_auth_url }}
-auth_plugin = password
+auth_type = password
 project_domain_name = {{ keystone_project_domain_name }}
 user_domain_name =  {{ keystone_user_domain_name}}
 project_name = {{ glance_admin_project_name }}
 username = {{ glance_admin_user }}
 password = {{ glance_admin_password }}
+service_token_roles_required = true
+service_token_roles = admin
 
 [oslo_messaging_rabbit]
 rabbit_hosts = {{ rabbit_hosts }}
 rabbit_userid = {{ rabbit_userid }}
 rabbit_password = {{ rabbit_password }}
-rabbit_use_ssl = {{ rabbit_use_ssl }}
+ssl = {{ rabbit_use_ssl }}
 
 [paste_deploy]
 flavor = {{ glance_registry_flavor }}

@@ -42,7 +42,6 @@ glance_registry_flavor: "{{ glance_default_flavor }}"
 
 # Notifications
 glance_registry_notification_driver: "{{ glance_default_notification_driver }}"
-glance_registry_notification_backend: "{{ glance_default_notification_backend }}"
 
 ## Allows common to know which component
 glance_component: glance-registry

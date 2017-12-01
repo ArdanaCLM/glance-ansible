@@ -90,6 +90,11 @@ rabbit_password: "{{ GLA.consumes_FND_RMQ.vars.accounts.glance.password }}"
 rabbit_userid: "{{ GLA.consumes_FND_RMQ.vars.accounts.glance.username }}"
 rabbit_use_ssl: "{{ GLA.consumes_FND_RMQ.members.private[0].use_tls }}"
 
+transport_url: >
+  {%- for x in GLA_API.consumes_FND_RMQ.members.private -%}
+    {{ rabbit_userid }}:{{ rabbit_password }}@{{ x.host }}:{{ x.port }}{%- if not loop.last -%},{%- endif -%}
+  {%- endfor -%}
+
 ## glance-check credentials
 glance_check_user: "{{ GLA_API.consumes_KEY_API.vars.keystone_glance_check_user }}"
 glance_check_tenant_name: "{{ GLA_API.consumes_KEY_API.vars.keystone_glance_check_tenant }}"

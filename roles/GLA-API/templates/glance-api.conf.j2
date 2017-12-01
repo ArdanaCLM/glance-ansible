@@ -24,32 +24,30 @@ data_api = {{ glance_data_api }}
 registry_host = {{ glance_registry_host }}
 registry_port = {{ glance_registry_port }}
 registry_client_protocol = {{ glance_registry_client_protocol }}
-rpc_backend = {{ glance_api_notification_backend }}
 {% if glance_api_cache_active %}
 image_cache_max_size = {{ glance_api_cache_max_size }}
 image_cache_dir = {{ glance_api_cache_dir }}
 {% endif %}
 workers = {{ glance_worker_count }}
+transport_url = {{ glance_default_notification_backend }}://{{ transport_url }}
 
 [image_format]
 container_formats = {{ container_formats }}
 
 [keystone_authtoken]
-revocation_cache_time = 10
 auth_uri = {{ keystone_auth_uri }}
 auth_url = {{ keystone_auth_url }}
-auth_plugin = password
+auth_type = password
 project_domain_name = {{ keystone_project_domain_name }}
 user_domain_name =  {{ keystone_user_domain_name}}
 project_name = {{ glance_admin_project_name }}
 username = {{ glance_admin_user }}
 password = {{ glance_admin_password }}
+service_token_roles_required = true
+service_token_roles = admin
 
 [oslo_messaging_rabbit]
-rabbit_hosts = {{ rabbit_hosts }}
-rabbit_userid = {{ rabbit_userid }}
-rabbit_password = {{ rabbit_password }}
-rabbit_use_ssl = {{ rabbit_use_ssl }}
+ssl = {{ rabbit_use_ssl }}
 
 [paste_deploy]
 flavor = {{ glance_api_flavor }}

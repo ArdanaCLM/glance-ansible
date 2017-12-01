@@ -41,7 +41,6 @@ glance_registry_client_protocol: "{{ GLA_API.consumes_GLA_REG.vips.private[0].pr
 
 ## Notifications
 glance_api_notification_driver: "{{ glance_default_notification_driver }}"
-glance_api_notification_backend: "{{ glance_default_notification_backend }}"
 
 ## Glance Store
 glance_stores: "{{ GLA_API.vars.glance_stores | default('swift') }}"
