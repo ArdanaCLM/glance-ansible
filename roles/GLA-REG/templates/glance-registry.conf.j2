@@ -37,6 +37,10 @@ username = {{ glance_admin_user }}
 password = {{ glance_admin_password }}
 service_token_roles_required = true
 service_token_roles = admin
+memcached_servers = {{ memcached_servers }}
+memcache_security_strategy = ENCRYPT
+memcache_secret_key = {{ memcache_secret_key }}
+memcache_pool_socket_timeout = 1
 
 [oslo_messaging_rabbit]
 rabbit_hosts = {{ rabbit_hosts }}
