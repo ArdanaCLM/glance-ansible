@@ -39,6 +39,7 @@
     --os-auth-url {{ glance_auth_url }} \
     --os-region-name {{ glance_region_name }} \
     --os-interface internal \
+    --os-cacert {{ glance_cacert_file }} \
     --debug \
     image create
     --container-format bare \

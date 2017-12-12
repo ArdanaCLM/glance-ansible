@@ -65,6 +65,7 @@ keystone_admin_endpoint: "{{ GLA_API.consumes_KEY_API.vips.private[0].url }}/v3"
 glance_admin_password: "{{ GLA_API.consumes_KEY_API.vars.keystone_glance_password | quote }}"
 glance_admin_project_name: "{{ KEY_API.vars.keystone_service_tenant }}"
 glance_admin_user: "{{ GLA_API.consumes_KEY_API.vars.keystone_glance_user }}"
+glance_cacert_file: "/etc/ssl/certs/ca-certificates.crt"
 memcached_servers: "{% for x in GLA.consumes_FND_MEM.members.private %}{{ x.host }}:{{ x.port }}{%if not loop.last %},{% endif %}{% endfor %}"
 memcache_secret_key: "{{ GLA.consumes_FND_MEM.vars.memcached.glance.secret_key | quote }}"
 
