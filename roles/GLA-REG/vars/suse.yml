@@ -14,8 +14,9 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 
-# Contains packages required for glance-registry service in Debian System
+# Contains packages required for glance-registry service on SUSE Systems
 ---
 # packages listed here will be installed by glance-registry install
 glance_registry_required_packages:
+  - cron
   - libmysqlclient18
