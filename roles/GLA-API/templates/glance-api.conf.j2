@@ -64,6 +64,7 @@ enabled = {{ osprofiler_enabled }}
 stores = {{ glance_stores }}
 default_store = {{ glance_default_store }}
 swift_store_auth_insecure = {{ glance_store_swift_auth_insecure }}
+swift_store_cacert = {{ glance_store_swift_store_cacert }}
 swift_store_endpoint_type = {{ glance_store_swift_store_endpoint_type }}
 {% if GLA_API.consumes_SWF_PRX is defined %}
 swift_store_endpoint = {{ GLA_API.consumes_SWF_PRX.vips.private[0].url }}/v1/AUTH_{{ glance_swift_project_id }}
