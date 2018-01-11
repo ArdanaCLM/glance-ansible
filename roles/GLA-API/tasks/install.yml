@@ -41,16 +41,24 @@
   register: ardana_notify_glance_api_restart_required
   when: glance_api_install_package_result.changed
 
+- name: GLA-API | install | Install Glance-check virtual env (rpm)
+  zypper:
+    name: python-glance-check
+    state: present
+  become: yes
+  when: deployer_media_legacy_layout|bool == false
+
 #Install Glance-check venv
-- name: GLA-API | install | Install Glance-check virtual env
+- name: GLA-API | install | Install Glance-check virtual env (legacy)
   become: yes
   install_package:
     name: glance-check
     service: glance-check
     state: present
+  when: deployer_media_legacy_layout|bool
 
 #Create glance-check binary symlinks
-- name: GLA-API | install | Create symlinks to binaries
+- name: GLA-API | install | Create symlinks to binaries (legacy)
   become: yes
   file:
     src: "{{ item }}"
@@ -60,6 +68,7 @@
     state: link
   with_items:
     - "/opt/stack/service/glance-check/venv/bin/glance-check"
+  when: deployer_media_legacy_layout|bool
 
 - name: GLA-API | install | Set glance-api configuration directory
   set_fact:
