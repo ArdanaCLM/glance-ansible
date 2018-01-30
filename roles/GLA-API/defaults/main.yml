@@ -61,7 +61,7 @@ glance_store_swift_ssl_compression: "False"
 glance_store_swift_auth_insecure: "False"
 glance_store_swift_store_cacert: "{{ glance_cacert_file }}"
 glance_store_swift_store_endpoint_type: "internalURL"
-glance_store_swift_store_auth_address: "{{ GLA_API.consumes_KEY_API.vips.private[0].url }}/v2.0"
+glance_store_swift_store_auth_address: "{{ GLA_API.consumes_KEY_API.vips.private[0].url }}/v3"
 glance_store_default_store_reference: "ardana-default-store"
 glance_store_swift_store_config_file: "glance-swift-store.conf"
 
