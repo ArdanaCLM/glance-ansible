@@ -1,6 +1,6 @@
 #
 # (c) Copyright 2015-2017 Hewlett Packard Enterprise Development LP
-# (c) Copyright 2017 SUSE LLC
+# (c) Copyright 2017-2018 SUSE LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License"); you may
 # not use this file except in compliance with the License. You may obtain
@@ -46,7 +46,7 @@ glance_api_notification_driver: "{{ glance_default_notification_driver }}"
 glance_stores: "{{ GLA_API.vars.glance_stores | default('swift') }}"
 glance_default_store: "{{ GLA_API.vars.glance_default_store | default('swift') }}"
 glance_store_filesystem_store_datadir: "/var/lib/glance/images"
-glance_store_swift_auth_version: "2"
+glance_store_swift_auth_version: "3"
 glance_store_swift_tenant_and_user: "{{glance_swift_tenant_name }}:{{ glance_swift_user }}"
 glance_cloud: "{{ host.my_dimensions.cloud_name }}"
 glance_cp: "{{ host.my_dimensions.control_plane }}"
