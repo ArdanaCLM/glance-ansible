@@ -20,3 +20,5 @@
 glance_registry_required_packages:
   - cron
   - libmysqlclient18
+  - logrotate
+  - qemu-tools
