@@ -42,8 +42,16 @@ glance_registry_client_protocol: "{{ GLA_API.consumes_GLA_REG.vips.private[0].pr
 ## Notifications
 glance_api_notification_driver: "{{ glance_default_notification_driver }}"
 
+## SES Integration
+# NOTE: 'ses_glance_user_name' is expected to come from global facts, which is
+# populated by the SES extension
+glance_ses_enabled: "{{ 'True' if ses_glance_user_name is defined else 'False' }}"
+glance_ses_user_name: "{{ ses_glance_user_name | default('') }}"
+glance_ses_pool_name: "{{ ses_glance_pool_name | default('') }}"
+glance_ses_ceph_conf_file_path: "{{ ses_conf_file_path | default('') }}"
+
 ## Glance Store
-glance_stores: "{{ GLA_API.vars.glance_stores | default('swift') }}"
+glance_stores: "{{ GLA_API.vars.glance_stores | default('swift') }}{%- if glance_ses_enabled|bool %}, glance.store.rbd.Store{% endif %}"
 glance_default_store: "{{ GLA_API.vars.glance_default_store | default('swift') }}"
 glance_store_filesystem_store_datadir: "/var/lib/glance/images"
 glance_store_swift_auth_version: "3"
