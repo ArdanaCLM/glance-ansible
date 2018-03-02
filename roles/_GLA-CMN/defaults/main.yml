@@ -78,7 +78,7 @@ glance_registry_port: "{{ GLA_API.consumes_GLA_REG.vips.private[0].port }}"
 glance_api_port: "{{ GLA_API.advertises.vips.private[0].port }}"
 
 # WSGI Pipeline flavor
-glance_default_flavor: "keystone+healthcheck"
+glance_default_flavor: "keystone"
 
 ## OSProfiler
 osprofiler_enabled: "False"

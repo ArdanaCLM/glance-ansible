@@ -1,7 +1,7 @@
 {#
 #
 # (c) Copyright 2015,2016 Hewlett Packard Enterprise Development LP
-# (c) Copyright 2017 SUSE LLC
+# (c) Copyright 2017-2018 SUSE LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License"); you may
 # not use this file except in compliance with the License. You may obtain
@@ -17,7 +17,7 @@
 #
 #}
 [loggers]
-keys: root, iso8601{%- if glance_api_audit_enable|bool %}, audit{% endif %}
+keys: root, iso8601, eventletwsgi{%- if glance_api_audit_enable|bool %}, audit{% endif %}
 
 [handlers]
 keys: watchedfile, logstash{%- if glance_api_audit_enable|bool %}, auditfile{% endif %}
@@ -34,6 +34,13 @@ level: NOTSET
 qualname: iso8601
 handlers: watchedfile, logstash
 level: INFO
+
+# Keep eventlet.wsgi.server chattiness to a minimum, otherwise
+# the healthcheck middleware will flood the logs
+[logger_eventletwsgi]
+qualname: eventlet.wsgi.server
+handlers: watchedfile, logstash
+level: WARNING
 
 {%- if glance_api_audit_enable|bool %}
 
