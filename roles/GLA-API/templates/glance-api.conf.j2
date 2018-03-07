@@ -81,8 +81,8 @@ swift_store_config_file = {{ glance_api_conf_dir }}/{{ glance_store_swift_store_
 swift_store_ssl_compression = {{ glance_store_swift_ssl_compression }}
 filesystem_store_datadir = {{ glance_store_filesystem_store_datadir }}
 {% if glance_ses_enabled|bool %}
-rbd_store = {{ glance_ses_pool_name }}
-rbd_user = {{ glance_ses_user_name }}
+rbd_store_pool = {{ glance_ses_pool_name }}
+rbd_store_user = {{ glance_ses_user_name }}
 rbd_store_ceph_conf = {{ glance_ses_ceph_conf_file_path }}
 {% endif %}
 
