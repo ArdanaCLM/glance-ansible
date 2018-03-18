@@ -1,6 +1,6 @@
 #
 # (c) Copyright 2015 Hewlett Packard Enterprise Development LP
-# (c) Copyright 2017 SUSE LLC
+# (c) Copyright 2017-2018 SUSE LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License"); you may
 # not use this file except in compliance with the License. You may obtain
@@ -22,7 +22,7 @@ glance_admin_tenant_name: "{{ KEY_API.vars.keystone_service_tenant }}"
 glance_admin_user: "{{ GLA_API.consumes_KEY_API.vars.keystone_glance_user }}"
 glance_region_name: "{{ GLA.regions | first }}"
 
-glance_default_image_file: "/tmp/cirros-0.3.4-x86_64-disk.img"
+glance_default_image_file: "/tmp/cirros-0.4.0-x86_64-disk.img"
 
 glance_cacert_file: "/etc/ssl/certs/ca-certificates.crt"
 
