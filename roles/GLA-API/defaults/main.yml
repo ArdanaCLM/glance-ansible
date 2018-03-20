@@ -52,7 +52,8 @@ glance_ses_ceph_conf_file_path: "{{ ses_conf_file_path | default('') }}"
 
 ## Glance Store
 glance_stores: "{{ GLA_API.vars.glance_stores | default('swift') }}{%- if glance_ses_enabled|bool %}, glance.store.rbd.Store{% endif %}"
-glance_default_store: "{{ GLA_API.vars.glance_default_store | default('swift') }}"
+glance_fallback: "{%- if glance_ses_enabled|bool %}rbd{% else %}swift{% endif %}"
+glance_default_store: "{{ GLA_API.vars.glance_default_store | default(glance_fallback) }}"
 glance_store_filesystem_store_datadir: "/var/lib/glance/images"
 glance_store_swift_auth_version: "3"
 glance_store_swift_tenant_and_user: "{{glance_swift_tenant_name }}:{{ glance_swift_user }}"
