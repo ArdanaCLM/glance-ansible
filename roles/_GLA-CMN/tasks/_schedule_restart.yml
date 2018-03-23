@@ -14,6 +14,14 @@
 # under the License.
 #
 ---
-- include: _glance-schedule-restart.yml
+- name: _GLA-CMN | _schedule_restart | Schedule a restart for glance API
+  debug:
+    msg: "Trigger a change notification in glance API"
+  changed_when: true
+  register: ardana_notify_glance_api_restart_required
 
-- include: glance-start.yml
+- name: _GLA-CMN | _schedule_restart | Schedule a restart for glance-registry
+  debug:
+    msg: "Trigger a change notification in glance registry"
+  changed_when: true
+  register: ardana_notify_glance_registry_restart_required
