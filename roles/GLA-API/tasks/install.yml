@@ -41,11 +41,11 @@
   register: ardana_notify_glance_api_restart_required
   when: glance_api_install_package_result.changed
 
-- name: GLA-API | install | Install Glance-check virtual env (rpm)
-  zypper:
+- name: GLA-API | install | Install python-glance-check
+  become: yes
+  package:
     name: python-glance-check
     state: present
-  become: yes
   when: deployer_media_legacy_layout|bool == false
 
 #Install Glance-check venv
