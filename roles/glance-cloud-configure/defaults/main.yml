@@ -24,6 +24,6 @@ glance_region_name: "{{ GLA.regions | first }}"
 
 glance_default_image_file: "/tmp/cirros-0.4.0-x86_64-disk.img"
 
-glance_cacert_file: "/etc/ssl/certs/ca-certificates.crt"
+glance_cacert_file: "{{ trusted_ca_bundle }}"
 
 proxy: ""

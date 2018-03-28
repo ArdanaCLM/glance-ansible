@@ -1,7 +1,4 @@
-{#
-#
-# (c) Copyright 2015-2016 Hewlett Packard Enterprise Development LP
-# (c) Copyright 2017-2018 SUSE LLC
+# (c) Copyright 2018 SUSE LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License"); you may
 # not use this file except in compliance with the License. You may obtain
@@ -15,15 +12,6 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 #
-#}
-[DEFAULT]
-cacert_file: {{ trusted_ca_bundle }}
-image_url = http://{{ glance_api_bind_host }}:{{ glance_api_port }}
-endpoint_url = {{ glance_api_vip }}
-
-username = {{ glance_check_user }}
-project_name = {{ glance_check_tenant_name }}
-password = {{ glance_check_password }}
-auth_url = {{ keystone_auth_url }}
-project_domain_name = {{ keystone_project_domain_name }}
-user_domain_name =  {{ keystone_user_domain_name}}
+---
+dependencies:
+  - role: tls-vars
