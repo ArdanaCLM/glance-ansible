@@ -21,7 +21,7 @@
   run_once_per: verb_hosts.GLA_API
   get_url:
     timeout: 30
-    url: "http://download.cirros-cloud.net/0.4.0/cirros-0.4.0-x86_64-disk.img"
+    url: "{{ glance_default_image_url }}"
     dest: "{{ glance_default_image_file }}"
   register: get_url_result
   until: get_url_result|success

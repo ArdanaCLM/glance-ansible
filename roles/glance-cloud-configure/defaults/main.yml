@@ -22,6 +22,7 @@ glance_admin_tenant_name: "{{ KEY_API.vars.keystone_service_tenant }}"
 glance_admin_user: "{{ GLA_API.consumes_KEY_API.vars.keystone_glance_user }}"
 glance_region_name: "{{ GLA.regions | first }}"
 
+glance_default_image_url: "{{ local_image_mirror_url|default('http://download.cirros-cloud.net/0.4.0') }}/cirros-0.4.0-x86_64-disk.img"
 glance_default_image_file: "/tmp/cirros-0.4.0-x86_64-disk.img"
 
 glance_cacert_file: "{{ trusted_ca_bundle }}"
