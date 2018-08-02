@@ -55,7 +55,7 @@ memcache_pool_socket_timeout = 1
 ssl = {{ rabbit_use_ssl }}
 
 [paste_deploy]
-flavor = {{ glance_api_flavor }}
+flavor = healthcheck
 
 [profiler]
 enabled = {{ osprofiler_enabled }}

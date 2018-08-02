@@ -1,6 +1,6 @@
 #
 # (c) Copyright 2015-2017 Hewlett Packard Enterprise Development LP
-# (c) Copyright 2017 SUSE LLC
+# (c) Copyright 2017-2018 SUSE LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License"); you may
 # not use this file except in compliance with the License. You may obtain
@@ -23,6 +23,7 @@
       url: "http://{{ glance_registry_bind_host }}:{{
             glance_registry_port }}/healthcheck"
       dimensions: "service:image-service,component:glance-registry"
+      match_pattern: ".*OK.*"
 
 - name: GLA-REG | set_httpcheck | Setup check against GLA-REG health internal
   become: yes
@@ -31,3 +32,4 @@
     args:
       url: "{{ glance_reg_private_url }}/healthcheck"
       dimensions: "service:image-service,component:glance-registry"
+      match_pattern: ".*OK.*"

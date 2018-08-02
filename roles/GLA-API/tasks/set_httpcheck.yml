@@ -1,6 +1,6 @@
 #
 # (c) Copyright 2015-2017 Hewlett Packard Enterprise Development LP
-# (c) Copyright 2017 SUSE LLC
+# (c) Copyright 2017-2018 SUSE LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License"); you may
 # not use this file except in compliance with the License. You may obtain
@@ -25,6 +25,7 @@
     args:
       url: "http://{{ glance_api_bind_host }}:{{ glance_api_port }}/healthcheck"
       dimensions: "service:image-service,component:glance-api"
+      match_pattern: ".*OK.*"
   when: glance_api_enabled
 
 - name: GLA-API | set_httpcheck | Setup active check against internal endpoint
@@ -34,4 +35,5 @@
     args:
       url: "{{ glance_api_private_url }}/healthcheck"
       dimensions: "service:image-service,component:glance-api"
+      match_pattern: ".*OK.*"
   when: glance_api_enabled
