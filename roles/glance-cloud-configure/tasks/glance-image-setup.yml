@@ -46,6 +46,7 @@
     --disk-format qcow2 \
     --public \
     --file {{ glance_default_image_file }} \
+    --os-identity-api-version 3 \
     cirros-0.4.0-x86_64"
   environment:
     OS_PASSWORD: "{{ glance_admin_password }}"
