@@ -38,20 +38,16 @@ pipeline = versionnegotiation osprofiler unauthenticated-context cache cachemana
 pipeline = versionnegotiation osprofiler authtoken context  rootapp
 
 # Use this pipeline for keystone auth with oslo middleware's audit
-[pipeline:glance-api-keystone+healthcheck+audit]
+[pipeline:glance-api-keystone+audit]
 pipeline = versionnegotiation osprofiler authtoken audit context rootapp
 
 # Use this pipeline for keystone auth with oslo middleware's caching
-[pipeline:glance-api-keystone+healthcheck+caching]
+[pipeline:glance-api-keystone+caching]
 pipeline = versionnegotiation osprofiler authtoken context cache rootapp
 
 # Use this pipeline for keystone auth with oslo middleware's caching and audit
-[pipeline:glance-api-keystone+healthcheck+caching+audit]
+[pipeline:glance-api-keystone+caching+audit]
 pipeline = versionnegotiation osprofiler authtoken audit context cache rootapp
-
-# Use this pipeline for keystone auth with image caching
-[pipeline:glance-api-keystone+caching]
-pipeline = versionnegotiation osprofiler authtoken context cache rootapp
 
 # Use this pipeline for keystone auth with caching and cache management
 [pipeline:glance-api-keystone+cachemanagement]
