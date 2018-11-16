@@ -94,3 +94,5 @@ driver = {{ glance_api_notification_driver }}
 
 [barbican]
 auth_endpoint = {{ keystone_auth_url }}/v3
+# NOTE: internal service to service communication should always be on internal network
+barbican_endpoint_type = internal
