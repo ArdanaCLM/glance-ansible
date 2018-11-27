@@ -60,7 +60,7 @@ keystone_auth_url: "{{ GLA_API.consumes_KEY_API.vips.private[0].url }}"
 keystone_admin_user: "{{ KEY_API.vars.keystone_admin_user }}"
 keystone_admin_password: "{{ KEY_API.vars.keystone_admin_pwd | quote }}"
 keystone_admin_role_name: "{{ KEY_API.vars.keystone_admin_role }}"
-keystone_member_role_name: "{{ KEY_API.vars.keystone_member_role }}"
+keystone_member_role_name: member
 keystone_admin_endpoint: "{{ GLA_API.consumes_KEY_API.vips.private[0].url }}/v3"
 glance_admin_password: "{{ GLA_API.consumes_KEY_API.vars.keystone_glance_password | quote }}"
 glance_admin_project_name: "{{ KEY_API.vars.keystone_service_tenant }}"

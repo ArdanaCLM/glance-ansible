@@ -69,7 +69,6 @@
     user_name: "{{ glance_swift_user }}"
     user_domain_name: "{{ keystone_user_domain_name }}"
     user_password: "{{ glance_swift_password }}"
-    role_name: "{{ keystone_member_role_name }}"
   run_once: True
 
 - name: GLA-API | keystone_conf | Grant member role to swift project
@@ -111,7 +110,6 @@
     user_name: "{{ glance_check_user }}"
     user_domain_name: "{{ keystone_user_domain_name }}"
     user_password: "{{ glance_check_password }}"
-    role_name: "{{ keystone_member_role_name }}"
   run_once: True
 
 - name: GLA-API | keystone_conf | Grant role for glance-check
