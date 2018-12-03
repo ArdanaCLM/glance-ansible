@@ -1,5 +1,5 @@
 #
-# (c) Copyright 2015 Hewlett Packard Enterprise Development LP
+# (c) Copyright 2016 Hewlett Packard Enterprise Development LP
 # (c) Copyright 2017 SUSE LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License"); you may
@@ -13,5 +13,9 @@
 # WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
 # License for the specific language governing permissions and limitations
 # under the License.
-#
+
+# Contains packages required for glance-api service in Debian System
 ---
+# packages listed here will be installed by glance-api install
+glance_api_required_packages:
+  - libmysqlclient18

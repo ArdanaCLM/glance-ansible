@@ -25,19 +25,20 @@
 #
 
 glance_api_conf_dir: "{{ 'glance-api' | config_dir() }}"
+glance_api_venv_dir: "{{ 'glance-api' | venv_dir() }}"
 glance_api_bin_dir: "{{ 'glance-api' | bin_dir() }}"
 glance_api_vip: "{{ GLA_API.advertises.vips.private[0].url }}"
 
 # glance-api.conf
 ## [DEFAULT]
 glance_api_paste_config: "{{ glance_service_conf_dir }}/api-paste.ini"
-glance_data_api: "glance.db.registry.api"
 glance_api_log_file: "{{ log_dir }}/glance-api.log"
 glance_api_log_json_file: "{{ log_dir }}/glance-api-json.log"
 
-## Registry
-glance_registry_host: "{{ GLA_API.consumes_GLA_REG.vips.private[0].host }}"
-glance_registry_client_protocol: "{{ GLA_API.consumes_GLA_REG.vips.private[0].protocol }}"
+### [database]
+ca_file: "{{ trusted_ca_bundle }}"
+db_ssl: "{% if GLA_API.consumes_FND_MDB.vips.private[0].use_tls %}?ssl_ca={{ ca_file }}{% endif %}"
+database_connection: "mysql+pymysql://{{ GLA_API.consumes_FND_MDB.vars.accounts.glance.username }}:{{ GLA_API.consumes_FND_MDB.vars.accounts.glance.password | urlencode }}@{{ GLA_API.consumes_FND_MDB.vips.private[0].host }}/glance{{ db_ssl }}"
 
 ## Notifications
 glance_api_notification_driver: "{{ glance_default_notification_driver }}"

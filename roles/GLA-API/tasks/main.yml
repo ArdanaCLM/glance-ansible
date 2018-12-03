@@ -13,9 +13,8 @@
 # WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
 # License for the specific language governing permissions and limitations
 # under the License.
-
-# Contains packages required for glance-registry service in Debian System
+#
 ---
-# packages listed here will be installed by glance-registry install
-glance_registry_required_packages:
-  - libmysqlclient18
+- name: GLA-API | main | Set os-specific variables
+  include_vars: "{{ ansible_os_family | lower }}.yml"
+

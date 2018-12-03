@@ -44,6 +44,60 @@
   register: ardana_notify_glance_api_restart_required
   when: glance_api_enabled
 
+
+- name: GLA-API | configure | Create Glance metadefs directory
+  become: yes
+  file:
+    path: "{{ glance_api_conf_dir }}/metadefs"
+    owner: "{{ glance_system_user }}"
+    group: "{{ glance_system_group }}"
+    mode: 0755
+    state: directory
+
+- name: GLA-API | configure | Copy Glance metadefs configuration files
+  become: yes
+  copy:
+    src: "etc/metadefs/{{ item }}"
+    dest: "{{ glance_api_conf_dir }}/metadefs/{{ item }}"
+    owner: "{{ glance_system_user }}"
+    group: "{{ glance_system_group }}"
+    mode: 0400
+    force: True
+  with_items:
+    - 'cim-processor-allocation-setting-data.json'
+    - 'cim-resource-allocation-setting-data.json'
+    - 'cim-storage-allocation-setting-data.json'
+    - 'cim-virtual-system-setting-data.json'
+    - 'compute-aggr-disk-filter.json'
+    - 'compute-aggr-iops-filter.json'
+    - 'compute-aggr-num-instances.json'
+    - 'compute-cpu-pinning.json'
+    - 'compute-guest-memory-backing.json'
+    - 'compute-guest-shutdown.json'
+    - 'compute-host-capabilities.json'
+    - 'compute-hypervisor.json'
+    - 'compute-instance-data.json'
+    - 'compute-libvirt-image.json'
+    - 'compute-libvirt.json'
+    - 'compute-quota.json'
+    - 'compute-randomgen.json'
+    - 'compute-trust.json'
+    - 'compute-vcputopology.json'
+    - 'compute-vmware-flavor.json'
+    - 'compute-vmware.json'
+    - 'compute-vmware-quota-flavor.json'
+    - 'compute-watchdog.json'
+    - 'compute-xenapi.json'
+    - 'glance-common-image-props.json'
+    - 'image-signature-verification.json'
+    - 'operating-system.json'
+    - 'software-databases.json'
+    - 'software-runtimes.json'
+    - 'software-webservers.json'
+    - 'storage-volume-type.json'
+    - 'README'
+  register: ardana_notify_glance_api_metadef_change
+
   # NOTE(NiallBunting): This has to be placed before the
   # task where the glance-api.conf is created and after the
   # directory is created.

@@ -33,18 +33,6 @@
     - GLA-API
   tasks:
     - include: roles/GLA-API/tasks/start.yml
-
-- hosts: GLA-REG
-  roles:
-      - GLA-REG
-  tasks:
-    - include: roles/GLA-REG/tasks/configure.yml
-
-- hosts: GLA-REG
-  roles:
-      - GLA-REG
-  tasks:
-    - include: roles/GLA-REG/tasks/start.yml
-    - include: roles/GLA-REG/tasks/reload_metadef.yml
+    - include: roles/GLA-API/tasks/reload_metadef.yml
 
 - include: glance-configure-monasca.yml

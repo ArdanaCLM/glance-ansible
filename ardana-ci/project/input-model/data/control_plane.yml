@@ -83,4 +83,3 @@
           service-components:
             - ntp-client
 
-            - glance-registry

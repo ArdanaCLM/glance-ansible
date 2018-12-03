@@ -16,15 +16,6 @@
 #
 ---
 
-- hosts: GLA-REG:&MON-AGN
-  gather_facts: no
-  max_fail_percentage: 0
-  roles:
-    - {role: monasca-agent, run_mode: Use}
-    - GLA-REG
-  tasks:
-    - include: roles/GLA-REG/tasks/set_httpcheck.yml
-
 - hosts: GLA-API:&MON-AGN
   gather_facts: no
   max_fail_percentage: 0

@@ -76,5 +76,4 @@
             - swift-object
             - swift-ring-builder
             - glance-api
-            - glance-registry
             - openstack-client

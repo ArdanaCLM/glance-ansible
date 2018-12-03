@@ -19,9 +19,3 @@
     msg: "Trigger a change notification in glance API"
   changed_when: true
   register: ardana_notify_glance_api_restart_required
-
-- name: _GLA-CMN | _schedule_restart | Schedule a restart for glance-registry
-  debug:
-    msg: "Trigger a change notification in glance registry"
-  changed_when: true
-  register: ardana_notify_glance_registry_restart_required

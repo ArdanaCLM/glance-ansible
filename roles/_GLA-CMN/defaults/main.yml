@@ -74,7 +74,6 @@ glance_swift_user: "{{ GLA_API.consumes_KEY_API.vars.keystone_glance_swift_user 
 glance_swift_tenant_name: "{{ GLA_API.consumes_KEY_API.vars.keystone_glance_swift_tenant }}"
 glance_swift_password: "{{ GLA_API.consumes_KEY_API.vars.keystone_glance_swift_password | quote }}"
 
-glance_registry_port: "{{ GLA_API.consumes_GLA_REG.vips.private[0].port }}"
 glance_api_port: "{{ GLA_API.advertises.vips.private[0].port }}"
 
 # WSGI Pipeline flavor

@@ -22,10 +22,3 @@
     - GLA-API
   tasks:
     - include: roles/GLA-API/tasks/status.yml
-
-- hosts: GLA-REG
-  max_fail_percentage: 0
-  roles:
-    - GLA-REG
-  tasks:
-    - include: roles/GLA-REG/tasks/status.yml

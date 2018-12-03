@@ -41,48 +41,6 @@ image_cache_max_size = {{ glance_api_cache_max_size }}
 # Base directory that the Image Cache uses. (string value)
 image_cache_dir = {{ glance_api_cache_dir }}
 
-# Address to find the registry server. (string value)
-#registry_host = 0.0.0.0
-
-# Port the registry server is listening on. (integer value)
-# Minimum value: 1
-# Maximum value: 65535
-#registry_port = 9191
-
-# Whether to pass through the user token when making requests to the
-# registry. To prevent failures with token expiration during big files
-# upload, it is recommended to set this parameter to False.If
-# "use_user_token" is not in effect, then admin credentials can be
-# specified. (boolean value)
-#use_user_token = true
-
-# The administrators user name. If "use_user_token" is not in effect,
-# then admin credentials can be specified. (string value)
-#admin_user = <None>
-
-# The administrators password. If "use_user_token" is not in effect,
-# then admin credentials can be specified. (string value)
-#admin_password = <None>
-
-# The tenant name of the administrative user. If "use_user_token" is
-# not in effect, then admin tenant name can be specified. (string
-# value)
-#admin_tenant_name = <None>
-
-# The URL to the keystone service. If "use_user_token" is not in
-# effect and using keystone auth, then URL of keystone can be
-# specified. (string value)
-#auth_url = <None>
-
-# The strategy to use for authentication. If "use_user_token" is not
-# in effect, then auth strategy can be specified. (string value)
-#auth_strategy = noauth
-
-# The region for the authentication service. If "use_user_token" is
-# not in effect and using keystone auth, then region name can be
-# specified. (string value)
-#auth_region = <None>
-
 #
 # From oslo.log
 #

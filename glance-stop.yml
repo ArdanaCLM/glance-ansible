@@ -20,9 +20,3 @@
   - GLA-API
   tasks:
   - include: roles/GLA-API/tasks/stop.yml
-
-- hosts: GLA-REG
-  roles:
-  - GLA-REG
-  tasks:
-  - include: roles/GLA-REG/tasks/stop.yml

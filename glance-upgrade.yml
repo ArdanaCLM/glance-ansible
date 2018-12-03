@@ -16,22 +16,8 @@
 #
 ---
 - include: glance-status.yml
+
 - include: ses-deploy.yml
-
-- hosts: GLA-REG
-  roles:
-    - GLA-REG
-  tasks:
-  - include: roles/GLA-REG/tasks/install.yml
-
-- hosts: GLA-REG
-  roles:
-    - GLA-REG
-  tasks:
-    - include: roles/GLA-REG/tasks/configure.yml
-    - include: roles/GLA-REG/tasks/db_configure.yml
-    - include: roles/GLA-REG/tasks/reload_metadef.yml
-    - include: roles/GLA-REG/tasks/start.yml
 
 - hosts: GLA-API
   roles:
@@ -53,6 +39,8 @@
       ansible_python_interpreter: "{{
         KEY_CLI.vars.keystone_client_python_interpreter }}"
     - include: roles/GLA-API/tasks/configure.yml
+    - include: roles/GLA-API/tasks/db_configure.yml
+    - include: roles/GLA-API/tasks/reload_metadef.yml
     - include: roles/GLA-API/tasks/start.yml
 
 - include: glance-status.yml

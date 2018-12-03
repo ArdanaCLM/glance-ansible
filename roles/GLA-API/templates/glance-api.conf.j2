@@ -20,22 +20,22 @@ bind_host = {{ host.bind.GLA_API.internal.ip_address }}
 bind_port = {{ glance_api_port }}
 log_file = {{ glance_api_log_file }}
 log_config_append={{ glance_api_conf_dir }}/glance-api-logging.conf
-data_api = {{ glance_data_api }}
-registry_host = {{ glance_registry_host }}
-registry_port = {{ glance_registry_port }}
-registry_client_protocol = {{ glance_registry_client_protocol }}
 {% if glance_api_cache_active %}
 image_cache_max_size = {{ glance_api_cache_max_size }}
 image_cache_dir = {{ glance_api_cache_dir }}
 {% endif %}
 workers = {{ glance_worker_count }}
 transport_url = {{ glance_default_notification_backend }}://{{ transport_url }}
+enable_v2_api = true
+
+[database]
+connection = {{ database_connection }}
 
 [image_format]
 container_formats = {{ container_formats }}
 
 [keystone_authtoken]
-auth_uri = {{ keystone_auth_uri }}
+www_authenticate_uri = {{ keystone_auth_uri }}
 auth_url = {{ keystone_auth_url }}
 auth_type = password
 project_domain_name = {{ keystone_project_domain_name }}

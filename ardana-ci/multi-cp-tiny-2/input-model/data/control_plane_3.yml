@@ -70,5 +70,4 @@
             - mysql
             - ip-cluster
             - glance-api
-            - glance-registry
             - openstack-client

@@ -1,3 +1,4 @@
+---
 #
 # (c) Copyright 2015-2017 Hewlett Packard Enterprise Development LP
 # (c) Copyright 2017 SUSE LLC
@@ -14,14 +15,19 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 #
----
-- name: GLA-REG | reload_metadefs | Reload glance metadefs from default location
+
+- name: GLA-API | db_configure | Create tables in glance database (db_sync)
   become: yes
-  command: "{{ glance_registry_bin_dir }}/glance-manage
-            --config-dir {{ glance_registry_conf_dir }} db load_metadefs
-            --merge --prefer_new --path {{ glance_registry_conf_dir }}/metadefs"
-  run_once_per: verb_hosts.GLA_REG
-  when: ardana_notify_glance_registry_metadef_change is defined and
-        ardana_notify_glance_registry_metadef_change.changed and
-        glance_registry_metadef_reload_result is not defined
-  register: glance_registry_metadef_reload_result
+  command: "{{ glance_api_bin_dir }}/glance-manage
+            --config-dir {{ glance_api_conf_dir }} db_sync"
+  ignore_errors: yes
+  run_once_per: verb_hosts.GLA_API
+  register: db_sync_result
+
+- name: GLA-API | db_configure | Post create tables in glance database (db_sync)
+  fail:
+    msg: |
+        "Note: Check the glance api_sync errors."
+        "{{ db_sync_result.stderr }}"
+  when: db_sync_result.rc != 0
+  run_once_per: verb_hosts.GLA_API

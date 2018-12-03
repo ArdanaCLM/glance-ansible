@@ -47,4 +47,3 @@
                 ha_mode: false
                 glance_stores: 'file'
                 glance_default_store: 'file'
-            - glance-registry

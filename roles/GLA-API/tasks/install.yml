@@ -17,6 +17,24 @@
 ---
 - include: ../../_GLA-CMN/tasks/install.yml
 
+- name: GLA-API | install | Install required packages in Debian derivatives
+  become: yes
+  apt:
+    name: "{{ item }}"
+    install_recommends: no
+    state: latest
+  with_items:
+    glance_api_required_packages | default([])
+  when: ansible_os_family == 'Debian'
+
+- name: GLA-API | install | Install required packages in SUSE derivatives
+  become: yes
+  zypper:
+    name: "{{ item }}"
+  with_items:
+    glance_api_required_packages | default([])
+  when: ansible_os_family == 'Suse'
+
 - name: GLA-API | install | Update venv cache
   install_package:
     cache: update
