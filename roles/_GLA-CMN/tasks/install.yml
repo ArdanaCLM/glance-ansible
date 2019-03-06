@@ -26,4 +26,16 @@
     name: "{{ glance_system_user }}"
     group: "{{ glance_system_group }}"
     createhome: "{{ glance_system_createhome }}"
+    home: "{{ glance_home_dir }}"
     shell: "{{ glance_system_shell }}"
+
+# NOTE: Matching the creation of home dir with glance RPM package
+# openstack-glance
+- name: _GLA-CMN | install | Add user home
+  become: yes
+  file:
+    path: "{{ glance_home_dir }}"
+    state: directory
+    owner: "{{ glance_system_user }}"
+    group: "{{ glance_system_group }}"
+    mode: 0755

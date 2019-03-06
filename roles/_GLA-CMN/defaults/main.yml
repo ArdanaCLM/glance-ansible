@@ -30,8 +30,9 @@
 glance_system_group: glance
 glance_system_user: glance
 glance_system_createhome: false
-glance_system_shell: /bin/false
+glance_system_shell: /sbin/nologin
 
+glance_home_dir: /var/lib/glance
 glance_state_root_dir: ""
 
 # Number of maximum worker allowed regardless of CPUs available
