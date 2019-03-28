@@ -59,6 +59,7 @@ level: INFO
 class: handlers.WatchedFileHandler
 args: ( '{{ glance_api_log_file }}',)
 formatter: context
+level: INFO
 
 # Writes JSON to disk, beaver will ship to logstash
 # Note: log rotation configuration is being handled by Centralized Logging
