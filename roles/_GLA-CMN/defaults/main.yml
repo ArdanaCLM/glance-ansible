@@ -40,7 +40,7 @@ glance_max_workers: 8
 
 # Number of glance workers. The default will be the maximum allowed
 #  by variable glance_max_workers
-glance_worker_count: "{{ [glance_max_workers, [2, ansible_processor_vcpus / 2] | max] | min }}"
+glance_worker_count: "{{ [glance_max_workers, [2, ansible_processor_vcpus / 2] | max] | min | int }}"
 
 ### CA & SSL
 keys_path: "{{ glance_state_root_dir }}/var/lib/glance/keys"
