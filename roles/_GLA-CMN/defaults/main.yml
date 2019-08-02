@@ -108,3 +108,7 @@ ardana_group: "{{ ansible_env.USER }}"
 
 # Allowed container formats
 container_formats: "ami,ari,aki,bare,ovf,ova,docker"
+
+# Deprecated glance services:
+glance_deprecated_services:
+  - glance-registry

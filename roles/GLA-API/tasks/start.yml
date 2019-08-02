@@ -16,6 +16,29 @@
 #
 ---
 
+- name: GLA-API | start | Stop running glance-api before home dir move
+  include: stop.yml
+  when: not (ardana_notify_glance_user_home_move_needed is not defined)
+
+- name: GLA-API | start | Update home dir location if needed
+  become: yes
+  user:
+    name: "{{ glance_system_user }}"
+    group: "{{ glance_system_group }}"
+    move_home: no
+    home: "{{ glance_home_dir }}"
+    shell: "{{ glance_system_shell }}"
+  when:
+    - not (ardana_notify_glance_user_home_move_needed is not defined)
+    - ardana_notify_glance_user_home_move_needed.changed
+
+- name: GLA-API | start | Clear persistent flag
+  stat:
+    path: /dev/null
+  when:
+    - ardana_notify_glance_user_home_move_needed is defined
+    - ardana_notify_glance_user_home_move_needed | changed
+
 - include: singleton.yml
 
 - name: GLA-API | start | Activate the latest installed version

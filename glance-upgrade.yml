@@ -15,6 +15,9 @@
 # under the License.
 #
 ---
+
+- include: glance-upgrade-deprecations.yml
+
 - include: glance-status.yml
 
 - include: ses-deploy.yml

@@ -20,7 +20,12 @@
   become: yes
   group: name={{ glance_system_group }}
 
-- name: _GLA-CMN | install | Add glance user
+# this creates the getent_passwd fact enumerating the existing users
+- name: _GLA-CMN | install | Check if user already exists
+  getent:
+    database: passwd
+
+- name: _GLA-CMN | install | Create glance user if it doesn't exist
   become: yes
   user:
     name: "{{ glance_system_user }}"
@@ -28,10 +33,40 @@
     createhome: "{{ glance_system_createhome }}"
     home: "{{ glance_home_dir }}"
     shell: "{{ glance_system_shell }}"
+  when:
+    - glance_system_user not in getent_passwd
+
+- name: _GLA-CMN | install | Move existing home dir if needed
+  become: yes
+  user:
+    name: "{{ glance_system_user }}"
+    group: "{{ glance_system_group }}"
+    move_home: yes
+    home: "{{ glance_home_dir }}"
+    shell: "{{ glance_system_shell }}"
+  when:
+    - glance_system_user in getent_passwd
+    - getent_passwd[glance_system_user][4] != glance_home_dir
+  register: glance_user_move_home_result
+  failed_when:
+    - glance_user_move_home_result | failed
+    - ("user " ~ glance_system_user ~ " is currently used by process"
+       not in glance_user_move_home_result.msg)
+
+- name: _GLA-CMN | install | Set flag to indicate start needs to try this
+  stat:
+    path: /dev/null
+  changed_when: true
+  register: ardana_notify_glance_user_home_move_needed
+  when:
+    - glance_user_move_home_result is defined
+    - glance_user_move_home_result.msg is defined
+    - ("user " ~ glance_system_user ~ " is currently used by process"
+       in glance_user_move_home_result.msg)
 
 # NOTE: Matching the creation of home dir with glance RPM package
 # openstack-glance
-- name: _GLA-CMN | install | Add user home
+- name: _GLA-CMN | install | Create user home
   become: yes
   file:
     path: "{{ glance_home_dir }}"
