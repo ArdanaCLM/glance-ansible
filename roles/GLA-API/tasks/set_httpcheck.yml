@@ -23,7 +23,7 @@
   monasca_agent_plugin:
     name: "httpcheck"
     args:
-      url: "http://{{ glance_api_bind_host }}:{{ glance_api_port }}/healthcheck"
+      url: "http://{{ glance_api_bind_host | ipwrap }}:{{ glance_api_port }}/healthcheck"
       dimensions: "service:image-service,component:glance-api"
       match_pattern: ".*OK.*"
   when: glance_api_enabled

@@ -18,7 +18,7 @@
 #}
 [DEFAULT]
 cacert_file: {{ trusted_ca_bundle }}
-image_url = http://{{ glance_api_bind_host }}:{{ glance_api_port }}
+image_url = http://{{ glance_api_bind_host | ipwrap }}:{{ glance_api_port }}
 endpoint_url = {{ glance_api_vip }}
 
 username = {{ glance_check_user }}
