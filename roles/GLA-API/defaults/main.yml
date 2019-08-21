@@ -34,6 +34,12 @@ glance_api_vip: "{{ GLA_API.advertises.vips.private[0].url }}"
 glance_api_paste_config: "{{ glance_service_conf_dir }}/api-paste.ini"
 glance_api_log_file: "{{ log_dir }}/glance-api.log"
 glance_api_log_json_file: "{{ log_dir }}/glance-api-json.log"
+# Revealing image locations can present a GRAVE SECURITY RISK as image
+# locations can sometimes include credentials. Hence, this is set to False
+# by default. Set this to True with EXTREME CAUTION and ONLY IF you know what
+# you are doing!
+glance_show_image_direct_url: False
+glance_show_multiple_locations: False
 
 ### [database]
 ca_file: "{{ trusted_ca_bundle }}"

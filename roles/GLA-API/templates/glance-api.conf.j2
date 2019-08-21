@@ -28,6 +28,13 @@ workers = {{ glance_worker_count }}
 transport_url = {{ glance_default_notification_backend }}://{{ transport_url }}
 enable_v2_api = true
 
+# Revealing image locations can present a GRAVE SECURITY RISK as image
+# locations can sometimes include credentials. Hence, this is set to False
+# by default. Set this to True with EXTREME CAUTION and ONLY IF you know what
+# you are doing!
+show_image_direct_url = {{ glance_show_image_direct_url }}
+show_multiple_locations = {{ glance_show_multiple_locations }}
+
 [database]
 connection = {{ database_connection }}
 
