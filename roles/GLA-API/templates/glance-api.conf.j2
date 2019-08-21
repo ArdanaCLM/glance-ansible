@@ -31,6 +31,13 @@ image_cache_dir = {{ glance_api_cache_dir }}
 workers = {{ glance_worker_count }}
 transport_url = {{ glance_default_notification_backend }}://{{ transport_url }}
 
+# Revealing image locations can present a GRAVE SECURITY RISK as image
+# locations can sometimes include credentials. Hence, this is set to False
+# by default. Set this to True with EXTREME CAUTION and ONLY IF you know what
+# you are doing!
+show_image_direct_url = {{ glance_show_image_direct_url }}
+show_multiple_locations = {{ glance_show_multiple_locations }}
+
 [image_format]
 container_formats = {{ container_formats }}
 
