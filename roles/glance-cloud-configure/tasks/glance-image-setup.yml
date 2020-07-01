@@ -16,6 +16,46 @@
 #
 ---
 
+# Only upload an image if it doesn't already exist
+- name: glance-cloud-configure | glance-image-setup | Retrieve image list
+  run_once_per: verb_hosts.GLA_API
+  command: "openstack \
+    --os-username {{ glance_admin_user }} \
+    --os-project-name {{ glance_admin_tenant_name }} \
+    --os-default-domain-name {{ glance_admin_default_domain }} \
+    --os-auth-url {{ glance_auth_url }} \
+    --os-region-name {{ glance_region_name }} \
+    --os-interface internal \
+    --os-cacert {{ glance_cacert_file }} \
+    --debug \
+    image list \
+    --format yaml"
+  environment:
+    OS_PASSWORD: "{{ glance_admin_password }}"
+  register: openstack_image_list_result
+
+- name: glance-cloud-configure | glance-image-setup | Extract image list data
+  run_once_per: verb_hosts.GLA_API
+  set_fact:
+    _all_images: "{{ openstack_image_list_result.stdout | from_yaml }}"
+
+- name: glance-cloud-configure | glance-image-setup | Find any cirros images
+  run_once_per: verb_hosts.GLA_API
+  set_fact:
+    _cirros_images: "{{ _all_images | selectattr('Name', 'equalto', glance_default_image_name) | list }}"
+
+- name: glance-cloud-configure | glance-image-setup | Report if cirros image exists
+  run_once_per: verb_hosts.GLA_API
+  debug:
+    msg: |-
+
+      Found existing cirros image(s):
+      {% for i in _cirros_images %}
+        ID: {{ i.ID }} Status: {{ i.Status }} Name: {{ i.Name }}
+      {% endfor %}
+  when:
+    - (_cirros_images | length) > 0
+
 - name: glance-cloud-configure | glance-image-setup | Download cirros image
   become: yes
   run_once_per: verb_hosts.GLA_API
@@ -29,6 +69,8 @@
   delay: 10
   environment:
     http_proxy: "{{ proxy }}"
+  when:
+    - (_cirros_images | length) == 0
 
 #TODO: make this a configurable list of images to upload
 - name: glance-cloud-configure | glance-image-setup | Upload cirros image
@@ -47,14 +89,19 @@
     --public \
     --file {{ glance_default_image_file }} \
     --os-identity-api-version 3 \
-    cirros-0.4.0-x86_64"
+    --tag {{ glance_default_image_name }} \
+    {{ glance_default_image_name }}"
   environment:
     OS_PASSWORD: "{{ glance_admin_password }}"
   register: openstackclient_result
   until: openstackclient_result|success
   retries: 5
   delay: 10
+  when:
+    - (_cirros_images | length) == 0
 
 - name: glance-cloud-configure | glance-image-setup | Cirros image upload debug
   debug:
     var: openstackclient_result.stdout_lines
+  when:
+    - (_cirros_images | length) == 0
